@@ -61,6 +61,13 @@ func (v *Schema) ValidateDocument(root interface{}) *Result {
 	return result
 }
 
+func (v *Schema) validateDocument(root interface{}) *Result {
+	result := &Result{}
+	context := NewJsonContext(STRING_CONTEXT_ROOT, nil)
+	v.rootSchema.validateRecursive(v.rootSchema, root, result, context)
+	return result
+}
+
 func (v *subSchema) subValidateWithContext(document interface{}, context *JsonContext) *Result {
 	result := &Result{}
 	v.validateRecursive(v, document, result, context)
