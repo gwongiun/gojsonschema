@@ -56,9 +56,11 @@ type Schema struct {
 	rootSchema        *subSchema
 	pool              *schemaPool
 	referencePool     *schemaReferencePool
+	Nil               bool
 }
 
 func (d *Schema) parse(document interface{}, draft Draft) error {
+	d.Nil = true
 	d.rootSchema = &subSchema{property: STRING_ROOT_SCHEMA_PROPERTY, draft: &draft}
 	return d.parseSchema(document, d.rootSchema)
 }
